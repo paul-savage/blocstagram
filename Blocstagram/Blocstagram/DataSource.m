@@ -54,6 +54,14 @@
     [mutableArrayWithKVO removeObject:item];
 }
 
+- (void)insertMediaItem:(Media *)item atIndex:(NSUInteger)index {
+    
+    
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+    
+    [mutableArrayWithKVO insertObject:item atIndex:index];
+}
+
 - (void)addRandomData {
     
     NSMutableArray *randomMediaItems =[NSMutableArray array];
