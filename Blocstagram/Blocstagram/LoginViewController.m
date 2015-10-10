@@ -32,6 +32,10 @@ NSString *const LoginViewControllerDidGetAccessTokenNotification = @"LoginViewCo
     
     self.title = NSLocalizedString(@"Login", @"Login");
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back command") style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     NSString *urlString = [NSString stringWithFormat:@"https://instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=token", [DataSource instagramClientID], [self redirectURI]];
     
     NSURL *url = [NSURL URLWithString:urlString];
@@ -40,6 +44,14 @@ NSString *const LoginViewControllerDidGetAccessTokenNotification = @"LoginViewCo
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.webView loadRequest:request];
+    }
+}
+
+- (void)goBack {
+    
+    if ([self.webView canGoBack]) {
+        
+        [self.webView goBack];
     }
 }
 
