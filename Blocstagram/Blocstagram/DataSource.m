@@ -12,7 +12,6 @@
 #import "Comment.h"
 #import "LoginViewController.h"
 #import <UICKeyChainStore.h>
-#import "ImagesTableViewController.h"
 
 @interface DataSource () {
     
@@ -21,6 +20,7 @@
 
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSArray *mediaItems;
+@property (nonatomic, strong) NSString *requestRefresh;
 @property (nonatomic, assign) BOOL isRefreshing;
 @property (nonatomic, assign) BOOL isLoadingOlderItems;
 @property (nonatomic, assign) BOOL thereAreNoMoreOlderMessages;
@@ -81,9 +81,10 @@
                             [self downloadImageForMediaItem:mediaItem];
                         }
                         
-                        UINavigationController *navVC = (UINavigationController *)[[UIApplication sharedApplication] keyWindow].rootViewController;
-                        ImagesTableViewController *imagesVC = navVC.viewControllers[0];
-                        [imagesVC restartRefresh];
+                        //UINavigationController *navVC = (UINavigationController *)[[UIApplication sharedApplication] keyWindow].rootViewController;
+                        //ImagesTableViewController *imagesVC = navVC.viewControllers[0];
+                        //[imagesVC restartRefresh];
+                        self.requestRefresh = @"Refresh";
                         
                     } else {
                         

@@ -10,6 +10,4 @@
 
 @interface ImagesTableViewController : UITableViewController
 
-- (void)restartRefresh;
-
 @end

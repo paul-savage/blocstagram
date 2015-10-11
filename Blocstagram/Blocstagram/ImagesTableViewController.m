@@ -35,6 +35,7 @@
     [super viewDidLoad];
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
+    [[DataSource sharedInstance] addObserver:self forKeyPath:@"requestRefresh" options:0 context:nil];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
@@ -87,6 +88,7 @@
 - (void)dealloc {
     
     [[DataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
+    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"requestRefresh"];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -200,6 +202,9 @@
             
             [self.tableView endUpdates];
         }
+    } else if (object == [DataSource sharedInstance] && [keyPath isEqualToString:@"requestRefresh"]) {
+        
+        [self restartRefresh];
     }
 }
 
