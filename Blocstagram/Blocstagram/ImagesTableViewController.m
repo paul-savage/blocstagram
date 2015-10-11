@@ -54,6 +54,12 @@
     }];
 }
 
+- (void)restartRefresh {
+    [self.refreshControl beginRefreshing];
+    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y - self.refreshControl.frame.size.height) animated:YES];
+    [self.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+}
+
 - (void)infiniteScrollIfNecessary {
     
     NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];

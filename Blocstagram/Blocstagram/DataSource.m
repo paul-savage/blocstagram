@@ -12,6 +12,7 @@
 #import "Comment.h"
 #import "LoginViewController.h"
 #import <UICKeyChainStore.h>
+#import "ImagesTableViewController.h"
 
 @interface DataSource () {
     
@@ -75,11 +76,14 @@
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
                         
-                        // #1
                         for (Media* mediaItem in self.mediaItems) {
                             
                             [self downloadImageForMediaItem:mediaItem];
                         }
+                        
+                        UINavigationController *navVC = (UINavigationController *)[[UIApplication sharedApplication] keyWindow].rootViewController;
+                        ImagesTableViewController *imagesVC = navVC.viewControllers[0];
+                        [imagesVC restartRefresh];
                         
                     } else {
                         
