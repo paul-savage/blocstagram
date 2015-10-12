@@ -8,27 +8,43 @@
 
 #import "MediaFullScreenViewController.h"
 #import "Media.h"
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#import "MediaTableViewCell.h"
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 @interface MediaFullScreenViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) Media *media;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@property (nonatomic, strong) MediaTableViewCell *cell;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@property (nonatomic, strong) UIButton *shareButton;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @end
 
 
 @implementation MediaFullScreenViewController
 
-- (instancetype)initWithMedia:(Media *)media {
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//- (instancetype)initWithMedia:(Media *)media {
+- (instancetype)initWithCell:(MediaTableViewCell *)cell {
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     self = [super init];
     
     if (self) {
         
-        self.media = media;
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //self.media = media;
+        self.cell = cell;
+        self.media = cell.mediaItem;
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
     
     return self;
@@ -60,7 +76,28 @@
     
     [self.scrollView addGestureRecognizer:self.tap];
     [self.scrollView addGestureRecognizer:self.doubleTap];
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.enabled = YES;
+    button.titleLabel.userInteractionEnabled = NO;
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [button setTitle:@"Share" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareButton = button;
+    [self.view addSubview:self.shareButton];
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- (void)buttonTapped:(UIButton *)targetButton {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate shareCell:self.cell];
+    }];
+}
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 - (void)didReceiveMemoryWarning {
     
@@ -90,6 +127,12 @@
     
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.maximumZoomScale = 1;
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    CGFloat buttonWidth = 80;
+    CGFloat buttonHeight = 30;
+    CGFloat displayWidth = self.view.bounds.size.width;
+    self.shareButton.frame = CGRectMake(displayWidth - (buttonWidth + 10), 25, buttonWidth, buttonHeight);
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
 
 - (void)centerScrollView {

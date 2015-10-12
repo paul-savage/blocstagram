@@ -15,7 +15,9 @@
 #import "MediaFullScreenViewController.h"
 
 
-@interface ImagesTableViewController () <MediaTableViewCellDelegate>
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@interface ImagesTableViewController () <MediaTableViewCellDelegate, MediaFullScreenViewControllerDelegate>
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @end
 
@@ -206,12 +208,24 @@
 
 - (void)cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
     
-    MediaFullScreenViewController *fullScreenVC = [[MediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //MediaFullScreenViewController *fullScreenVC = [[MediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
+    MediaFullScreenViewController *fullScreenVC = [[MediaFullScreenViewController alloc] initWithCell:cell];
+    fullScreenVC.delegate = self;
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     [self presentViewController:fullScreenVC animated:YES completion:nil];
 }
 
 - (void)cell:(MediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView {
+    
+    [self shareCell:cell];
+}
+
+
+#pragma mark - MediaFullScreenViewControllerDelegate
+
+- (void)shareCell:(MediaTableViewCell *)cell {
     
     NSMutableArray *itemsToShare = [NSMutableArray array];
     
@@ -231,5 +245,6 @@
         [self presentViewController:activityVC animated:YES completion:nil];
     }
 }
+
 
 @end
