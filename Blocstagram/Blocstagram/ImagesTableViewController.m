@@ -232,4 +232,11 @@
     }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- (void)cell:(MediaTableViewCell *)cell didDoubleTapImageView:(UIImageView *)imageView {
+    
+    [[DataSource sharedInstance] requestMediaItem:cell.mediaItem withCompletionHandler:nil];
+}
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 @end

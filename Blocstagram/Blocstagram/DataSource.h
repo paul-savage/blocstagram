@@ -24,5 +24,8 @@ typedef void (^NewItemCompletionBlock)(NSError *error);
 - (void)deleteMediaItem:(Media *)item;
 - (void)requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 - (void)requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- (void)requestMediaItem:(Media *)item withCompletionHandler:(NewItemCompletionBlock)completionHandler;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @end

@@ -183,6 +183,19 @@
     }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- (void)requestMediaItem:(Media *)item withCompletionHandler:(NewItemCompletionBlock)completionHandler {
+    
+    if (self.isRefreshing == NO) {
+        
+        // force download by clearing reference to image
+        item.image = nil;
+        
+        [self downloadImageForMediaItem:item];
+    }
+}
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 - (void)populateDataWithParameters:(NSDictionary *)parameters completionHandler:(NewItemCompletionBlock)completionHandler {
     
     if (self.accessToken) {
