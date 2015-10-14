@@ -72,11 +72,11 @@
     Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
     
     if (item.image) {
-        
+       
         return 350;
         
     } else {
-        
+
         return 150;
     }
 }
@@ -91,6 +91,41 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     [self infiniteScrollIfNecessary];
+    
+    if (scrollView.decelerating) {
+        
+        [self startDownloadingVisibleImages];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    
+    [self startDownloadingVisibleImages];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    [self startDownloadingVisibleImages];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    [self startDownloadingVisibleImages];
+}
+
+- (void)startDownloadingVisibleImages {
+    
+    NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
+    
+    for (NSIndexPath *nextPath in visibleIndexPaths) {
+        
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[nextPath.row];
+        
+        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+            
+            [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -115,7 +150,12 @@
     
     if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
         
-        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
+        
+        if ([visibleIndexPaths containsObject:indexPath]) {
+            
+            [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
     }
 }
 
