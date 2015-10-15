@@ -221,7 +221,6 @@
         Media *mediaItem = [[Media alloc] initWithDictionary:mediaDictionary];
         
         if (mediaItem) {
-            
             [tmpMediaItems addObject:mediaItem];
         }
     }
@@ -260,7 +259,7 @@
     [self saveImages];
 }
 
-- (void) saveImages {
+- (void)saveImages {
     
     if (self.mediaItems.count > 0) {
         
@@ -351,6 +350,10 @@
     
     NSDictionary *parameters = @{@"access_token": self.accessToken};
     
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    BOOL simulateSuccessfulLiking = YES;
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
     if (mediaItem.likeState == LikeStateNotLiked) {
         
         mediaItem.likeState = LikeStateLiking;
@@ -359,6 +362,10 @@
             
             mediaItem.likeState = LikeStateLiked;
             
+            mediaItem.likeCount++;
+            
+            [self saveImages];
+            
             if (completionHandler) {
                 
                 completionHandler();
@@ -366,6 +373,17 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             mediaItem.likeState = LikeStateNotLiked;
+            
+            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            if (simulateSuccessfulLiking) {
+                
+                mediaItem.likeState = LikeStateLiked;
+                
+                mediaItem.likeCount++;
+                
+                [self saveImages];
+            }
+            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             
             if (completionHandler) {
                 
@@ -381,6 +399,10 @@
             
             mediaItem.likeState = LikeStateNotLiked;
             
+            mediaItem.likeCount++;
+            
+            [self saveImages];
+            
             if (completionHandler) {
                 
                 completionHandler();
@@ -388,6 +410,17 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             mediaItem.likeState = LikeStateLiked;
+            
+            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            if (simulateSuccessfulLiking) {
+                
+                mediaItem.likeState = LikeStateNotLiked;
+                
+                mediaItem.likeCount++;
+                
+                [self saveImages];
+            }
+            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             
             if (completionHandler) {
                 
