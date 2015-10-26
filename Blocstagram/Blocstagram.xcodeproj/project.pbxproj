@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		034FD9B0C8C25D3D08678512 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064E7EE0C49EA71DB55E1514 /* libPods.a */; };
+		3838757A1BDE291600E008F5 /* CameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 383875791BDE291600E008F5 /* CameraToolbar.m */; };
+		38687FA61BDE2B6E00C5DFE2 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */; };
+		38687FA91BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */; };
 		389A84491BCBA23D00C3A893 /* MediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 389A84481BCBA23D00C3A893 /* MediaFullScreenViewController.m */; };
 		389D99DB1BD0ED7B00DCAC39 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389D99DA1BD0ED7B00DCAC39 /* ComposeCommentView.m */; };
 		38A02F1D1BCE4D5C00C33CA1 /* CircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A02F1C1BCE4D5C00C33CA1 /* CircleSpinnerView.m */; };
@@ -49,6 +52,12 @@
 /* Begin PBXFileReference section */
 		064E7EE0C49EA71DB55E1514 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		181E160FDAC5FECE0D60B202 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		383875781BDE290B00E008F5 /* CameraToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraToolbar.h; sourceTree = "<group>"; };
+		383875791BDE291600E008F5 /* CameraToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraToolbar.m; sourceTree = "<group>"; };
+		38687FA41BDE2B6E00C5DFE2 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		38687FA71BDE2EE600C5DFE2 /* UIImage+ImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageUtilities.h"; sourceTree = "<group>"; };
+		38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageUtilities.m"; sourceTree = "<group>"; };
 		389A84471BCBA23D00C3A893 /* MediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFullScreenViewController.h; sourceTree = "<group>"; };
 		389A84481BCBA23D00C3A893 /* MediaFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaFullScreenViewController.m; sourceTree = "<group>"; };
 		389D99D91BD0ED7B00DCAC39 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentView.h; sourceTree = "<group>"; };
@@ -146,6 +155,10 @@
 			children = (
 				38CF055F1BBEE47B00C06A7D /* AppDelegate.h */,
 				38CF05601BBEE47B00C06A7D /* AppDelegate.m */,
+				383875781BDE290B00E008F5 /* CameraToolbar.h */,
+				383875791BDE291600E008F5 /* CameraToolbar.m */,
+				38687FA41BDE2B6E00C5DFE2 /* CameraViewController.h */,
+				38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */,
 				38A02F1B1BCE4D5C00C33CA1 /* CircleSpinnerView.h */,
 				38A02F1C1BCE4D5C00C33CA1 /* CircleSpinnerView.m */,
 				38A9961C1BC66F310014F1BE /* Comment.h */,
@@ -166,6 +179,8 @@
 				389A84481BCBA23D00C3A893 /* MediaFullScreenViewController.m */,
 				38A996221BC688360014F1BE /* MediaTableViewCell.h */,
 				38A996231BC688360014F1BE /* MediaTableViewCell.m */,
+				38687FA71BDE2EE600C5DFE2 /* UIImage+ImageUtilities.h */,
+				38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */,
 				38A996161BC66D880014F1BE /* User.h */,
 				38A996171BC66D880014F1BE /* User.m */,
 				38CF05681BBEE47B00C06A7D /* Images.xcassets */,
@@ -280,6 +295,7 @@
 				TargetAttributes = {
 					38CF05571BBEE47A00C06A7D = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = YC792623JA;
 					};
 					38CF05701BBEE47B00C06A7D = {
 						CreatedOnToolsVersion = 6.4;
@@ -388,18 +404,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38687FA61BDE2B6E00C5DFE2 /* CameraViewController.m in Sources */,
 				389A84491BCBA23D00C3A893 /* MediaFullScreenViewController.m in Sources */,
 				38A02F1D1BCE4D5C00C33CA1 /* CircleSpinnerView.m in Sources */,
 				38A996181BC66D880014F1BE /* User.m in Sources */,
 				38A9961E1BC66F310014F1BE /* Comment.m in Sources */,
 				38A996241BC688360014F1BE /* MediaTableViewCell.m in Sources */,
 				38A9961B1BC66E640014F1BE /* Media.m in Sources */,
+				3838757A1BDE291600E008F5 /* CameraToolbar.m in Sources */,
 				38CF05611BBEE47B00C06A7D /* AppDelegate.m in Sources */,
 				38CE4BC31BC92FD900E7819E /* LoginViewController.m in Sources */,
 				38A02F201BCE521000C33CA1 /* LikeButton.m in Sources */,
 				38A996211BC66FBA0014F1BE /* DataSource.m in Sources */,
 				389D99DB1BD0ED7B00DCAC39 /* ComposeCommentView.m in Sources */,
 				38CF055E1BBEE47B00C06A7D /* main.m in Sources */,
+				38687FA91BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m in Sources */,
 				38CF05981BBEE77000C06A7D /* ImagesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,9 +540,12 @@
 			baseConfigurationReference = 90A968EFAC724F7193865D72 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -532,9 +554,12 @@
 			baseConfigurationReference = 181E160FDAC5FECE0D60B202 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
