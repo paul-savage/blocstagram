@@ -55,11 +55,17 @@ static NSString * const reuseIdentifier = @"Cell";
     CGFloat minWidth = 100;
     NSInteger divisor = width / minWidth;
     CGFloat cellSize = width / divisor;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    CGFloat spacing = 1.0;
+    cellSize = (width - spacing * 3) / 4;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(cellSize, cellSize);
-    flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.minimumLineSpacing = 0;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    flowLayout.minimumInteritemSpacing = spacing;
+    flowLayout.minimumLineSpacing = spacing;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -17,6 +17,11 @@
 @property (nonatomic, strong) CropBox *cropBox;
 @property (nonatomic, assign) BOOL hasLoadedOnce;
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@property (nonatomic, strong) UIToolbar *topView;
+@property (nonatomic, strong) UIToolbar *bottomView;
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 @end
 
 
@@ -44,6 +49,17 @@
     self.view.clipsToBounds = YES;
     
     [self.view addSubview:self.cropBox];
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    self.topView = [UIToolbar new];
+    self.bottomView = [UIToolbar new];
+    [self.view addSubview:self.topView];
+    [self.view addSubview:self.bottomView];
+    UIColor *whiteBG = [UIColor colorWithWhite:1.0 alpha:.15];
+    self.topView.barTintColor = whiteBG;
+    self.bottomView.barTintColor = whiteBG;
+    self.topView.alpha = 0.5;
+    self.bottomView.alpha = 0.5;
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Crop", @"Crop command") style:UIBarButtonItemStyleDone target:self action:@selector(cropPressed:)];
     
@@ -70,6 +86,12 @@
     self.cropBox.center = CGPointMake(size.width / 2, size.height / 2);
     self.scrollView.frame = self.cropBox.frame;
     self.scrollView.clipsToBounds = NO;
+    
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.cropBox.frame), width, CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(self.cropBox.frame));
+    self.topView.frame = CGRectMake(0, self.topLayoutGuide.length, width, CGRectGetMinY(self.cropBox.frame) - self.topLayoutGuide.length);
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     [self recalculateZoomScale];
     
