@@ -14,6 +14,7 @@
 		3838757A1BDE291600E008F5 /* CameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 383875791BDE291600E008F5 /* CameraToolbar.m */; };
 		38687FA61BDE2B6E00C5DFE2 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */; };
 		38687FA91BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */; };
+		3872EF5B1BE24EC500E57AFF /* FilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872EF5A1BE24EC500E57AFF /* FilterCollectionViewCell.m */; };
 		389A84491BCBA23D00C3A893 /* MediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 389A84481BCBA23D00C3A893 /* MediaFullScreenViewController.m */; };
 		389D99DB1BD0ED7B00DCAC39 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389D99DA1BD0ED7B00DCAC39 /* ComposeCommentView.m */; };
 		38A02F1D1BCE4D5C00C33CA1 /* CircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A02F1C1BCE4D5C00C33CA1 /* CircleSpinnerView.m */; };
@@ -68,6 +69,8 @@
 		38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		38687FA71BDE2EE600C5DFE2 /* UIImage+ImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageUtilities.h"; sourceTree = "<group>"; };
 		38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageUtilities.m"; sourceTree = "<group>"; };
+		3872EF591BE24EC500E57AFF /* FilterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCollectionViewCell.h; sourceTree = "<group>"; };
+		3872EF5A1BE24EC500E57AFF /* FilterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCollectionViewCell.m; sourceTree = "<group>"; };
 		389A84471BCBA23D00C3A893 /* MediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFullScreenViewController.h; sourceTree = "<group>"; };
 		389A84481BCBA23D00C3A893 /* MediaFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaFullScreenViewController.m; sourceTree = "<group>"; };
 		389D99D91BD0ED7B00DCAC39 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCommentView.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				380DC1871BDF92E7001AAD7E /* CropImageViewController.m */,
 				38A9961F1BC66FBA0014F1BE /* DataSource.h */,
 				38A996201BC66FBA0014F1BE /* DataSource.m */,
+				3872EF591BE24EC500E57AFF /* FilterCollectionViewCell.h */,
+				3872EF5A1BE24EC500E57AFF /* FilterCollectionViewCell.m */,
 				380DC1891BDF9492001AAD7E /* ImageLibraryViewController.h */,
 				380DC18A1BDF9492001AAD7E /* ImageLibraryViewController.m */,
 				38CF05961BBEE77000C06A7D /* ImagesTableViewController.h */,
@@ -427,6 +432,7 @@
 				38687FA61BDE2B6E00C5DFE2 /* CameraViewController.m in Sources */,
 				389A84491BCBA23D00C3A893 /* MediaFullScreenViewController.m in Sources */,
 				38A02F1D1BCE4D5C00C33CA1 /* CircleSpinnerView.m in Sources */,
+				3872EF5B1BE24EC500E57AFF /* FilterCollectionViewCell.m in Sources */,
 				38A996181BC66D880014F1BE /* User.m in Sources */,
 				380DC18B1BDF9492001AAD7E /* ImageLibraryViewController.m in Sources */,
 				380DC1851BDF8FAF001AAD7E /* CropBox.m in Sources */,
