@@ -72,6 +72,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
     
     if (indexPath)
@@ -430,6 +432,11 @@
     }
     
     return;
+}
+
+- (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
+{
+    NSLog(@"prepareForPopoverPresentation");
 }
 
 - (void)cameraViewController:(CameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image

@@ -10,7 +10,7 @@
 #import "Media.h"
 
 
-@interface MediaFullScreenViewController () <UIScrollViewDelegate>
+@interface MediaFullScreenViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
@@ -50,14 +50,48 @@
     self.scrollView.contentSize = self.media.image.size;
 
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
+    self.tap.numberOfTapsRequired = 1;
+    
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet)
+    {
+        self.tap.cancelsTouchesInView = NO;
+        self.tap.delegate = self;
+    }
     
     self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapFired:)];
     self.doubleTap.numberOfTapsRequired = 2;
     
     [self.tap requireGestureRecognizerToFail:self.doubleTap];
     
-    [self.scrollView addGestureRecognizer:self.tap];
+    if (self.modalPresentationStyle != UIModalPresentationFormSheet)
+    {
+        [self.scrollView addGestureRecognizer:self.tap];
+    }
+    
     [self.scrollView addGestureRecognizer:self.doubleTap];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet)
+    {
+        [self.view.window addGestureRecognizer:self.tap];
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,6 +164,11 @@
 #pragma mark - Gesture Recognizers
 
 - (void)tapFired:(UITapGestureRecognizer *)sender {
+    
+    if (self.modalPresentationStyle == UIModalPresentationFormSheet)
+    {
+        [self.view.window removeGestureRecognizer:self.tap];
+    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
