@@ -25,9 +25,6 @@
 
 @property (nonatomic, strong) UIDocumentInteractionController *documentController;
 
-@property (nonatomic, strong) NSLayoutConstraint *imageWidthConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
-
 @end
 
 
@@ -58,48 +55,27 @@
         self.filterImages = [NSMutableArray arrayWithObject:sourceImage];
         self.filterTitles = [NSMutableArray arrayWithObject:NSLocalizedString(@"None", @"Label for when no filter is applied to a photo")];
         
-        //self.sendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        //self.sendButton.backgroundColor = [UIColor colorWithRed:0.345 green:0.318 blue:0.424 alpha:1]; /*#58516c*/
-        //self.sendButton.layer.cornerRadius = 5;
-        //[self.sendButton setAttributedTitle:[self sendAttributedString] forState:UIControlStateNormal];
-        //[self.sendButton addTarget:self action:@selector(sendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.sendButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.sendButton.backgroundColor = [UIColor colorWithRed:0.345 green:0.318 blue:0.424 alpha:1]; /*#58516c*/
+        self.sendButton.layer.cornerRadius = 5;
+        [self.sendButton setAttributedTitle:[self sendAttributedString] forState:UIControlStateNormal];
+        [self.sendButton addTarget:self action:@selector(sendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         self.sendBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIBarButtonItemStyleDone target:self action:@selector(sendButtonPressed:)];
         
         [self addFiltersToQueue];
         
-        for (UIView *view in @[self.previewImageView, self.filterCollectionView])
+        for (UIView *view in @[self.previewImageView, self.filterCollectionView, self.sendButton])
         {
-            [self.view addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
-        
-        self.navigationItem.rightBarButtonItem = self.sendBarButton;
-        
-        [self createConstraints];
     }
     
     return self;
 }
 
-- (void)createConstraints
+- (void)createConstraintsWithSendButton
 {
-    self.imageWidthConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:nil
-                                                             attribute:NSLayoutAttributeNotAnAttribute
-                                                            multiplier:1
-                                                              constant:100];
-    
-    self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil
-                                                              attribute:NSLayoutAttributeNotAnAttribute
-                                                             multiplier:1
-                                                               constant:100];
-    
     NSLayoutConstraint *imageCenterConstraint = [NSLayoutConstraint constraintWithItem:self.view
                                                                              attribute:NSLayoutAttributeCenterX
                                                                              relatedBy:NSLayoutRelationEqual
@@ -107,6 +83,131 @@
                                                                              attribute:NSLayoutAttributeCenterX
                                                                             multiplier:1
                                                                               constant:0];
+    
+    NSLayoutConstraint *imageSizeConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.previewImageView
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                          multiplier:1
+                                                                            constant:0];
+    
+    NSLayoutConstraint *imageHeightConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                                toItem:self.view
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                            multiplier:0.6
+                                                                              constant:0];
+    
+    NSLayoutConstraint *imageWidthConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self.view
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1
+                                                                             constant:0];
+  
+    NSLayoutConstraint *imageTopConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                          attribute:NSLayoutAttributeTop
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.topLayoutGuide
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                         multiplier:1
+                                                                           constant:0];
+    
+    NSLayoutConstraint *filterTopConstraint = [NSLayoutConstraint constraintWithItem:self.filterCollectionView
+                                                                              attribute:NSLayoutAttributeTop
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.previewImageView
+                                                                              attribute:NSLayoutAttributeBottom
+                                                                             multiplier:1
+                                                                               constant:10];
+    
+    NSLayoutConstraint *filterWidthConstraint = [NSLayoutConstraint constraintWithItem:self.filterCollectionView
+                                                                             attribute:NSLayoutAttributeWidth
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.view
+                                                                             attribute:NSLayoutAttributeWidth
+                                                                            multiplier:1
+                                                                              constant:0];
+    
+    NSLayoutConstraint *filterLeftConstraint = [NSLayoutConstraint constraintWithItem:self.filterCollectionView
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.view
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                           multiplier:1
+                                                                             constant:0];
+    
+    NSLayoutConstraint *sendButtonTopConstraint = [NSLayoutConstraint constraintWithItem:self.sendButton
+                                                                               attribute:NSLayoutAttributeTop
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.filterCollectionView
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                              multiplier:1
+                                                                                constant:10];
+    
+    NSLayoutConstraint *sendButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.view
+                                                                                  attribute:NSLayoutAttributeBottom
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.sendButton
+                                                                                  attribute:NSLayoutAttributeBottom
+                                                                                 multiplier:1
+                                                                                   constant:10];
+    
+    NSLayoutConstraint *sendButtonLeftConstraint = [NSLayoutConstraint constraintWithItem:self.sendButton
+                                                                                attribute:NSLayoutAttributeLeft
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:self.view
+                                                                                attribute:NSLayoutAttributeLeft
+                                                                               multiplier:1
+                                                                                 constant:20];
+    
+    NSLayoutConstraint *sendButtonRightConstraint = [NSLayoutConstraint constraintWithItem:self.view
+                                                                                 attribute:NSLayoutAttributeRight
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:self.sendButton
+                                                                                 attribute:NSLayoutAttributeRight
+                                                                                multiplier:1
+                                                                                  constant:20];
+    
+    [self.view addConstraints:@[imageCenterConstraint, imageSizeConstraint, imageHeightConstraint, imageWidthConstraint, imageTopConstraint, filterTopConstraint, filterWidthConstraint, filterLeftConstraint, sendButtonTopConstraint, sendButtonBottomConstraint, sendButtonLeftConstraint, sendButtonRightConstraint]];
+}
+
+- (void)createConstraintsWithoutSendButton
+{
+    NSLayoutConstraint *imageCenterConstraint = [NSLayoutConstraint constraintWithItem:self.view
+                                                                             attribute:NSLayoutAttributeCenterX
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.previewImageView
+                                                                             attribute:NSLayoutAttributeCenterX
+                                                                            multiplier:1
+                                                                              constant:0];
+    
+    NSLayoutConstraint *imageSizeConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.previewImageView
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                          multiplier:1
+                                                                            constant:0];
+    
+    NSLayoutConstraint *imageHeightConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                                toItem:self.view
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                            multiplier:0.6
+                                                                              constant:0];
+    
+    NSLayoutConstraint *imageWidthConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self.view
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1
+                                                                             constant:0];
     
     NSLayoutConstraint *imageTopConstraint = [NSLayoutConstraint constraintWithItem:self.previewImageView
                                                                           attribute:NSLayoutAttributeTop
@@ -148,15 +249,15 @@
                                                                            multiplier:1
                                                                              constant:0];
     
-    [self.view addConstraints:@[self.imageHeightConstraint, self.imageWidthConstraint, imageCenterConstraint, imageTopConstraint, filterWidthConstraint, filterHeightConstraint, filterBottomConstraint, filterLeftConstraint]];
+    [self.view addConstraints:@[imageCenterConstraint, imageSizeConstraint, imageHeightConstraint, imageWidthConstraint, imageTopConstraint, filterHeightConstraint, filterWidthConstraint, filterBottomConstraint, filterLeftConstraint]];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    //[self.view addSubview:self.previewImageView];
-    //[self.view addSubview:self.filterCollectionView];
+    [self.view addSubview:self.previewImageView];
+    [self.view addSubview:self.filterCollectionView];
     
     // This doesn't get correct height if popover used, so sendButton disappears from view
     /*
@@ -183,33 +284,24 @@
     [super viewWillAppear:animated];
 
     // add send button here where frame dimensions are valid if popover
-    /*
+
     if (CGRectGetHeight(self.view.frame) > 500)
     {
         [self.view addSubview:self.sendButton];
+        
+        [self createConstraintsWithSendButton];
     }
     else
     {
         self.navigationItem.rightBarButtonItem = self.sendBarButton;
+        
+        [self createConstraintsWithoutSendButton];
     }
-     */
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
-    CGFloat width = CGRectGetWidth(self.view.frame);
-    CGFloat height = CGRectGetHeight(self.view.frame);
-    CGFloat availableHeight = 0.8 * height - self.topLayoutGuide.length - 20;
-    
-    if (availableHeight > width)
-    {
-        availableHeight = width;
-    }
-    
-    self.imageWidthConstraint.constant = availableHeight;
-    self.imageHeightConstraint.constant = availableHeight;
 
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.filterCollectionView.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(CGRectGetHeight(self.filterCollectionView.frame) - 20, CGRectGetHeight(self.filterCollectionView.frame));
