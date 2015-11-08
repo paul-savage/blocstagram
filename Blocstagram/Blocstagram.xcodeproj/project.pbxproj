@@ -11,6 +11,7 @@
 		380DC1851BDF8FAF001AAD7E /* CropBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DC1841BDF8FAF001AAD7E /* CropBox.m */; };
 		380DC1881BDF92E7001AAD7E /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DC1871BDF92E7001AAD7E /* CropImageViewController.m */; };
 		380DC18B1BDF9492001AAD7E /* ImageLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DC18A1BDF9492001AAD7E /* ImageLibraryViewController.m */; };
+		381557671BEF51D0004D6DB2 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 381557661BEF51D0004D6DB2 /* UserTests.m */; };
 		3838757A1BDE291600E008F5 /* CameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 383875791BDE291600E008F5 /* CameraToolbar.m */; };
 		38687FA61BDE2B6E00C5DFE2 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA51BDE2B6E00C5DFE2 /* CameraViewController.m */; };
 		38687FA91BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 38687FA81BDE2EE600C5DFE2 /* UIImage+ImageUtilities.m */; };
@@ -62,6 +63,7 @@
 		380DC1871BDF92E7001AAD7E /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
 		380DC1891BDF9492001AAD7E /* ImageLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLibraryViewController.h; sourceTree = "<group>"; };
 		380DC18A1BDF9492001AAD7E /* ImageLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLibraryViewController.m; sourceTree = "<group>"; };
+		381557661BEF51D0004D6DB2 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
 		383875781BDE290B00E008F5 /* CameraToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraToolbar.h; sourceTree = "<group>"; };
 		383875791BDE291600E008F5 /* CameraToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraToolbar.m; sourceTree = "<group>"; };
 		38687FA41BDE2B6E00C5DFE2 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				38CF05771BBEE47B00C06A7D /* BlocstagramTests.m */,
+				381557661BEF51D0004D6DB2 /* UserTests.m */,
 				38CF05751BBEE47B00C06A7D /* Supporting Files */,
 			);
 			path = BlocstagramTests;
@@ -451,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				381557671BEF51D0004D6DB2 /* UserTests.m in Sources */,
 				38CF05781BBEE47B00C06A7D /* BlocstagramTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
