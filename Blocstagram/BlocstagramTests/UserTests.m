@@ -32,6 +32,7 @@
                                        @"username" : @"d'oh",
                                        @"full_name" : @"Homer Simpson",
                                        @"profile_picture" : @"http://www.example.com/example.jpg"};
+    
     User *testUser = [[User alloc] initWithDictionary:sourceDictionary];
     
     XCTAssertEqualObjects(testUser.idNumber, sourceDictionary[@"id"], @"The ID number should be equal");
